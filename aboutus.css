@@ -1,0 +1,225 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+.container{
+    width: 100%;
+    height: 100%;
+    background-image:  linear-gradient(to left, rgba(0, 0, 0, 0.76), rgba(15, 15, 15, 0.5)), url('Elib.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 2px solid black;
+}
+.menu ul{
+    display: inline-flex;
+    margin: 50px;
+}
+.menu ul li{
+    list-style: none;
+    margin: 0 20px;
+    color: #b2b2b1;
+    cursor: pointer;
+}
+.menu ul li::after{
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: #c41e3ad2;
+    display: block;
+    margin: auto;
+    transition: 0.5;
+}
+.menu ul li:hover::after{
+    width: 100%;
+}
+.logo img{
+    width: 50px;
+    margin-top: -7px;
+    margin-right: 48px;
+}
+.active1{
+    color: #fff !important;
+    text-decoration: none;
+}
+.active2{
+    color: #fff !important;
+    text-decoration: none;
+}
+.active3{
+    color: #fff !important;
+    text-decoration: none;
+}
+.login-button{
+    top: 40px;
+    right: 10%;
+    position: absolute;
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 20px;
+    background-image: transparent;
+    background-origin: border-box;
+    background-clip: content-box,border-box;
+}
+.login-button:hover{
+    border: 1px solid #c41e3ad2;
+    background: #c41e3ad2;
+    transition: 1s;
+}
+.login-button span{
+    display: block;
+    padding: 8px 22px;
+}
+.app-text{
+    width: 90%;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+}
+.app-text h1{
+    font-size: 43px;
+}
+.app-text p{
+    font-size: 20px;
+    color: #fff;
+}
+
+/*-----our-mission-----*/
+.mission{
+    text-align: center;
+    width: 100%;
+    margin-top: 100px;
+}
+.mission h2{
+    font-size: 43px;
+    margin-bottom: 50px;
+}
+.mission p{
+    font-size: 20px;
+    margin-bottom: 100px;
+}
+
+/*-----our-vision-----*/
+.vision{
+    text-align: center;
+    width: 100%;
+    margin-top: 100px;
+}
+.vision h5{
+    font-size: 43px;
+    margin-bottom: 50px;
+}
+.vision p{
+    font-size: 20px;
+    margin-bottom: 100px;
+}
+
+/*-----choose--------*/
+
+.choose{
+    height: 30%;
+    width: 90%;
+    margin: auto;
+    background-image:  linear-gradient(to left, rgba(0, 0, 0, 0.76), rgba(15, 15, 15, 0.5)), url('BSU.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 2px solid black;
+    border-radius: 40px 40px 40px 40px;
+    text-align: center;
+    padding-top: 100px;
+    color: white;
+}
+.choose h3{
+    font-size: 36px;
+    font-weight: 300;
+}
+.row{
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-around;
+}
+
+/*-----join--------*/
+.join{
+    height: 30%;
+    margin: 0 40px;
+    background-image:  linear-gradient(to left, rgba(0, 0, 0, 0.76), rgba(15, 15, 15, 0.5)), url('BSU3.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 2px solid black;
+    border-radius: 40px 40px 40px 40px
+    }
+.join-text{
+    width: 80%;
+    margin: auto;
+    font-size: 30px;
+    color: #fff;
+    text-align: center;
+    padding-top: 100px;
+    }
+.join-button{
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 12px 34px;
+    font-size: 13px;
+    background: transparent;
+    position: relative;
+    cursor: pointer;
+    }
+.join-button:hover{
+    border: 1px solid #c41e3ad2;
+        background: #c41e3ad2;
+    transition: 1s;
+    }
+    
+
+/*-----footer-----*/
+
+.footer ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px; 
+    margin-top: 20px;
+    list-style-type: none;
+}
+.footer li{
+    margin: 0 10px;
+}
+.footer ul li::after{
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: #c41e3ad2;
+    display: block;
+    margin: auto;
+    transition: 0.5;
+}
+.footer ul li:hover::after{
+    width: 100%;
+}
+.footer1{
+    color: #000 !important;
+    text-decoration: none;
+}
+.footer2{
+    color: #000 !important;
+    text-decoration: none;
+}
+.footer3{
+    color: black !important;
+    text-decoration: none;
+}
+.footer p{
+    text-align: center;
+    margin-bottom: 40px;
+}

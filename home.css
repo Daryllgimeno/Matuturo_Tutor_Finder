@@ -1,0 +1,250 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+.container{
+    width: 100%;
+    height: 100%;
+    background-image:  linear-gradient(to left, rgba(0, 0, 0, 0.76), rgba(15, 15, 15, 0.5)), url('Elib.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 2px solid black;
+}
+.menu ul{
+    display: inline-flex;
+    margin: 50px;
+}
+.menu ul li{
+    list-style: none;
+    margin: 0 20px;
+    color: #b2b2b1;
+    cursor: pointer;
+}
+.menu ul li::after{
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: #c41e3ad2;
+    display: block;
+    margin: auto;
+    transition: 0.5;
+}
+.menu ul li:hover::after{
+    width: 100%;
+}
+.logo img{
+    width: 50px;
+    margin-top: -7px;
+    margin-right: 48px;
+}
+.active1{
+    color: #fff !important;
+    text-decoration: none;
+}
+.active2{
+    color: #fff !important;
+    text-decoration: none;
+}
+.active3{
+    color: #fff !important;
+    text-decoration: none;
+}
+.signup-button{
+    top: 40px;
+    right: 80px;
+    position: absolute;
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 20px;
+    background-image: transparent;
+    background-origin: border-box;
+    background-clip: content-box,border-box;
+}
+.signup-button:hover{
+    border: 1px solid #c41e3ad2;
+    background: #c41e3ad2;
+    transition: 1s;
+}
+.signup-button span{
+    display: block;
+    padding: 8px 22px;
+}
+.login-button{
+    top: 40px;
+    right: 10%;
+    position: absolute;
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 20px;
+    background-image: transparent;
+    background-origin: border-box;
+    background-clip: content-box,border-box;
+}
+.login-button:hover{
+    border: 1px solid #c41e3ad2;
+    background: #c41e3ad2;
+    transition: 1s;
+}
+.login-button span{
+    display: block;
+    padding: 8px 22px;
+}
+.banner{
+    width: 80%;
+    height: 70%;
+    top: 25%;
+    left: 130px;
+    position: absolute;
+    color: #fff;
+}
+.app-text{
+    width: 50%;
+    float: left;
+}
+.app-text h1{
+    font-size: 43px;
+    width: 640px;
+    position: relative;
+    margin-left: 40px;
+}
+.app-text p{
+    width: 650px;
+    font-size: 15px;
+    margin: 30px 0 30px 40px;
+    line-height: 25px;
+    color: #fff;
+}
+.visit-button{
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 12px 34px;
+    font-size: 13px;
+    background: transparent;
+    position: relative;
+    cursor: pointer;
+}
+.visit-button:hover{
+    border: 1px solid #c41e3ad2;
+    background: #c41e3ad2;
+    transition: 1s;
+}
+
+    /*-----offer--------*/
+
+.offer{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding-top: 100px;
+}
+h2{
+    font-size: 43px;
+    margin: 30px 0 30px 40px;
+}
+.row{
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-between;
+}
+.offer-col{
+    flex-basis: 31%;
+    background: #c41e3ad2;
+    border-radius: 10px;
+    margin-bottom: 5%;
+    padding: 20px 12px;
+    box-sizing: border-box;
+    transition: 0.5s;
+}
+h3{
+    text-align: center;
+    font-weight: 600;
+    margin: 10px 0;
+}
+.offer-col:hover{
+    box-shadow: 0 0 20px 0px rgb(8, 8, 8);
+}
+
+/*-----container1--------*/
+
+.container1{
+height: 30%;
+margin: 0 40px;
+background-image:  linear-gradient(to left, rgba(0, 0, 0, 0.76), rgba(15, 15, 15, 0.5)), url('BSU.png');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+border: 2px solid black;
+border-radius: 40px 40px 40px 40px
+}
+.bot-text{
+    width: 80%;
+    margin: auto;
+    font-size: 30px;
+    color: #fff;
+    text-align: center;
+    padding-top: 100px;
+}
+.getstarted-button{
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 12px 34px;
+    font-size: 13px;
+    background: transparent;
+    position: relative;
+    cursor: pointer;
+}
+.getstarted-button:hover{
+    border: 1px solid #c41e3ad2;
+    background: #c41e3ad2;
+    transition: 1s;
+}
+
+/*-----footer-----*/
+
+.footer ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px; 
+    margin-top: 20px;
+    list-style-type: none;
+}
+.footer li{
+    margin: 0 10px;
+}
+.footer ul li::after{
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: #c41e3ad2;
+    display: block;
+    margin: auto;
+    transition: 0.5;
+}
+.footer ul li:hover::after{
+    width: 100%;
+}
+.footer1{
+    color: #000 !important;
+    text-decoration: none;
+}
+.footer2{
+    color: #000 !important;
+    text-decoration: none;
+}
+.footer3{
+    color: #000 !important;
+    text-decoration: none;
+}
+.footer p{
+    text-align: center;
+    margin-bottom: 40px;
+}
