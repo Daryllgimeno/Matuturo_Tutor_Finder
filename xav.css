@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Font qualifiers */
+  /* font-family: "Raleway", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal; */
+
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('BSU3.png');
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+    padding-top: 100px;
+}
+
+.adminindex {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    width: 1200px;
+}
+
+
+
+.login-container {
+    background-color: rgba(255, 255, 255, 0.8); /* Slight transparency */
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+    min-width: 300px;
+    text-align: center;
+   
+}
+
+
+.contentcontainer
+{
+    background-color: rgba(255, 255, 255, 0.8); /* Slight transparency */
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 1200px;
+    
+   
+
+}
+.login-container h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.login-container input {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.login-container button {
+    width: 50%;
+    padding: 10px;
+    background-color: #00b4d8;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.login-container button:hover {
+    background-color: #0096c7;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.sidebar {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #f1f1f1;
+    position: static;
+    overflow: auto;
+    display: block;
+    padding-bottom: 100%;
+    
+  }
+  
+  .sidebar a {
+    display: block;
+    color: black;
+    padding: 16px;
+    text-decoration: none;
+  }
+   
+  .sidebar a.active {
+    background-color: #00b4d8;
+    color: white;
+  }
+  
+  th.content {
+    vertical-align: top;
+
+  
+
+  
+  }
+
+
+  .logoutbttn{
+  font-size: 16px;
+  cursor: pointer;
+  }
+
+  .bttn{
+    border: none;
+    width: 100%;
+    padding: 10px;
+    background-color: #00b4d8dc;
+    border: none;
+    color: white;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: auto;
+  }
+
+  .acctable{
+
+    width: 50%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    border: 3px solid #000; /* Outer table outline */
+    
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border: 2px solid #555; /* Inner column outline */
+   
+
+    }
+
+    th {
+        background-color: #f0f0f0;
+    }
+  }
+
+table{
+  width: 1200px;
+}

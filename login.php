@@ -64,85 +64,85 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $conn = null;
 ?>
 
-<!-- HTML remains unchanged, except for minor adjustments -->
-
-
-<html>
-    <head>
-        <title>Login and Register</title>
-        <link rel="stylesheet" href="login.css">
-    </head>
-    <body>
-        <div class="container">
-            <div class="menu">
-                <ul>
-                    <li class="logo"><img src="BSU LOGO.png" alt=""></li>
-                    <li><a href="home.html" class="active1">Home</a></li>
-                    <li><a href="" class="active2">Tutors</a></li>
-                    <li><a href="aboutus.html" class="active3">About Us</a></li>
-                </ul>
-            </div>
-            <div class="form-box">
-                <div class="button-box">
-                    <div id="btn"></div>
-                    <button type="button" class="toggle-btn" onclick="login()">Log In</button>
-                    <button type="button" class="toggle-btn" onclick="register()">Register</button>
-                </div>
-
-                <!-- Login Form -->
-                <form id="login" class="input-group" method="POST" action="login.php">
-                    <input type="text" class="input-field" name="username" placeholder="Username" required>
-                    <input type="password" class="input-field" name="password" placeholder="Password" required>
-                    <input type="checkbox" class="check-box" name="remember"><span>Remember Password</span>
-                    <button type="submit" class="submit-btn" name="login">Log In</button>
-                </form>
-
-                <!-- Register Form -->
-                <form id="register" class="input-group" method="POST" action="login.php">
-                    <input type="text" class="input-field" name="username" placeholder="Username" required>
-                    <input type="email" class="input-field" name="email" placeholder="Email ID" required>
-                    <input type="password" class="input-field" name="password" placeholder="Password" required>
-                    
-                    <!-- Role selection -->
-                    <div class="role-selection">
-                        <label for="role">I am a:</label>
-                        <select id="role" name="role" class="input-field" required>
-                            <option value="student">Student</option>
-                            <option value="tutor">Tutor</option>
-                        </select>
-                    </div>
-                    
-                    <input type="checkbox" class="check-box" name="terms"><span>I agree to the terms & conditions</span>
-                    <button type="submit" class="submit-btn" name="register">Register</button>
-                </form>
-            </div>
-        </div>
-
-        <section class="footer">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Register</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="container">
+        <div class="menu">
             <ul>
-                <li><a href="privacy.html" class="footer1">Privacy and Policy</a></li>
-                <li><a href="terms.html" class="footer2">Terms and Conditions</a></li>
-                <li><a href="contact.html" class="footer3">Contact</a></li>
+                <li class="logo"><img src="BSU LOGO.png" alt="BSU Logo"></li>
+                <li><a href="home.html" class="active1">Home</a></li>
+                <li><a href="" class="active2">Tutors</a></li>
+                <li><a href="aboutus.html" class="active3">About Us</a></li>
             </ul>
-            <p>© 2024 F4. All rights reserved.</p>
-        </section>
+        </div>
+        <div class="form-box">
+            <div class="button-box">
+                <div id="btn"></div>
+                <button type="button" class="toggle-btn" onclick="login()">Log In</button>
+                <button type="button" class="toggle-btn" onclick="register()">Register</button>
+            </div>
 
-        <script>
-            var x = document.getElementById("login");
-            var y = document.getElementById("register");
-            var z = document.getElementById("btn");
+            <!-- Login Form -->
+            <form id="login" class="input-group" method="POST" action="login.php">
+                <input type="text" class="input-field" name="username" placeholder="Username" required>
+                <input type="password" class="input-field" name="password" placeholder="Password" required>
+                <input type="checkbox" class="check-box" name="remember"><span>Remember Password</span>
+                <button type="submit" class="submit-btn" name="login">Log In</button>
+            </form>
 
-            function register() {
-                x.style.left = "-400px";
-                y.style.left = "50px";
-                z.style.left = "110px";
-            }
+            <!-- Register Form -->
+            <form id="register" class="input-group" method="POST" action="login.php">
+                <input type="text" class="input-field" name="username" placeholder="Username" required>
+                <input type="email" class="input-field" name="email" placeholder="Email ID" required>
+                <input type="password" class="input-field" name="password" placeholder="Password" required>
+                
+                <!-- Role selection -->
+                <div class="role-selection">
+                    <label for="role">I am a:</label>
+                    <select id="role" name="role" class="input-field" required>
+                        <option value="student">Student</option>
+                        <option value="tutor">Tutor</option>
+                    </select>
+                </div>
+                
+                <input type="checkbox" class="check-box" name="terms"><span>I agree to the terms & conditions</span>
+                <button type="submit" class="submit-btn" name="register">Register</button>
+            </form>
+        </div>
+    </div>
 
-            function login() {
-                x.style.left = "50px";
-                y.style.left = "450px";
-                z.style.left = "0";
-            }
-        </script>
-    </body>
+    <section class="footer">
+        <ul>
+            <li><a href="privacy.html" class="footer1">Privacy and Policy</a></li>
+            <li><a href="terms.html" class="footer2">Terms and Conditions</a></li>
+            <li><a href="contact.html" class="footer3">Contact</a></li>
+        </ul>
+        <p>© 2024 F4. All rights reserved.</p>
+    </section>
+
+    <script>
+        var x = document.getElementById("login");
+        var y = document.getElementById("register");
+        var z = document.getElementById("btn");
+
+        function register() {
+            x.style.left = "-400px";
+            y.style.left = "50px";
+            z.style.left = "110px";
+        }
+
+        function login() {
+            x.style.left = "50px";
+            y.style.left = "450px";
+            z.style.left = "0";
+        }
+    </script>
+</body>
 </html>
