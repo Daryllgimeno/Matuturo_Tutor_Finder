@@ -1,6 +1,5 @@
 <html>
     <head>
-        
         <title>Login and Register</title>
         <link rel="stylesheet" href="login.css">
     </head>
@@ -20,31 +19,34 @@
                     <button type="button" class="toggle-btn" onclick="login()">Log In</button>
                     <button type="button" class="toggle-btn" onclick="register()">Register</button>
                 </div>
-                <form id="login" class="input-group">
-                    <input type="text" class="input-field" placeholder="Username" required>
-                    <input type="password" class="input-field" placeholder="Password" required>
-                    <input type="checkbox" class="check-box"><span>Remember Password</span>
+
+                <!-- Login Form -->
+                <form id="login" class="input-group" method="POST" action="login.php">
+                    <input type="text" class="input-field" name="username" placeholder="Username" required>
+                    <input type="password" class="input-field" name="password" placeholder="Password" required>
+                    <input type="checkbox" class="check-box" name="remember"><span>Remember Password</span>
                     <button type="submit" class="submit-btn">Log In</button>
                 </form>
-                <form id="register" class="input-group">
-                    <input type="text" class="input-field" placeholder="Username" required>
-                    <input type="email" class="input-field" placeholder="Email ID" required>
-                    <input type="password" class="input-field" placeholder="Password" required>
-            
+
+                <!-- Register Form -->
+                <form id="register" class="input-group" method="POST" action="register.php">
+                    <input type="text" class="input-field" name="username" placeholder="Username" required>
+                    <input type="email" class="input-field" name="email" placeholder="Email ID" required>
+                    <input type="password" class="input-field" name="password" placeholder="Password" required>
+                    
                     <!-- Student or Tutor selection -->
                     <div class="role-selection">
                         <label for="role">I am a:</label>
-                        <select id="role" class="input-field" required>
+                        <select id="role" name="role" class="input-field" required>
                             <option value="student">Student</option>
                             <option value="tutor">Tutor</option>
                         </select>
                     </div>
-            
-                    <input type="checkbox" class="check-box"><span>I agree to the terms & conditions</span>
+                    
+                    <input type="checkbox" class="check-box" name="terms"><span>I agree to the terms & conditions</span>
                     <button type="submit" class="submit-btn">Register</button>
                 </form>
             </div>
-            
 
         <section class="footer">
             <ul>
@@ -56,22 +58,21 @@
         </section>
 
         <script>
-            var x = document.getElementById("login")
-            var y = document.getElementById("register")
-            var z = document.getElementById("btn")
+            var x = document.getElementById("login");
+            var y = document.getElementById("register");
+            var z = document.getElementById("btn");
 
-            function register(){
+            function register() {
                 x.style.left = "-400px";
                 y.style.left = "50px";
                 z.style.left = "110px";
             }
 
-            function login(){
+            function login() {
                 x.style.left = "50px";
                 y.style.left = "450px";
                 z.style.left = "0";
             }
-
         </script>
 
     </body>
