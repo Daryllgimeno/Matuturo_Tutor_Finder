@@ -17,7 +17,7 @@ include('config.php'); // This includes your PDO connection setup
 
 // Fetch all registered users from the database
 try {
-    $stmt = $conn->prepare("SELECT id, username, role FROM users"); 
+    $stmt = $conn->prepare("SELECT id, username, role, email FROM users"); 
     $stmt->execute();
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
@@ -62,7 +62,8 @@ try {
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
         }
 
-        .table th, .table td {
+        .table th,
+        .table td {
             vertical-align: middle;
         }
 
@@ -70,25 +71,28 @@ try {
             margin-top: 20px;
         }
 
-        .btn-danger {
-            margin-top: 20px;
-        }
-
-        h1, h3 {
+        h1,
+        h3 {
             color: #007bff;
         }
 
-        .content p {
-            font-size: 1.1rem;
-            color: #555;
+        /* Style for logout button at top-right */
+        .logout-btn {
+            position: absolute;
+            margin-top:20px;
+            margin-right:20px;
+            top: 15px;
+            right: 20px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 12px;
+            cursor: pointer;
         }
 
-        .content p strong {
-            color: #333;
-        }
-
-        .container-fluid {
-            padding-top: 20px;
+        .logout-btn:hover {
+            background-color: #c82333;
         }
     </style>
 </head>
@@ -111,8 +115,10 @@ try {
 
             <!-- Main Content -->
             <main class="col-md-9 ms-sm-auto col-lg-10 px-4">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <!-- Header with logout button -->
+                <div class="d-flex justify-content-between align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">Welcome to Matuturo Admin Dashboard</h1>
+                    <button class="logout-btn" onclick="window.location.href='logout.php'">Logout</button>
                 </div>
 
                 <div class="main-content">
@@ -126,6 +132,7 @@ try {
                                 <tr>
                                     <th>ID</th>
                                     <th>Username</th>
+                                    <th>Email</th>
                                     <th>Role</th>
                                 </tr>
                             </thead>
@@ -134,13 +141,12 @@ try {
                                     <tr>
                                         <td><?php echo htmlspecialchars($user['id']); ?></td>
                                         <td><?php echo htmlspecialchars($user['username']); ?></td>
+                                        <td><?php echo htmlspecialchars($user['email']); ?></td>
                                         <td><?php echo htmlspecialchars($user['role']); ?></td>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
-
-                        <button class="btn btn-danger" onclick="window.location.href='logout.php'">Logout</button>
                     </div>
                 </div>
             </main>
