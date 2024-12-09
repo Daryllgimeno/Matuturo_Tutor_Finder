@@ -37,7 +37,9 @@ $search_price = isset($_GET['price']) ? $_GET['price'] : '';
 
 // Fetch tutor posts (tutors looking for students) with optional filters
 try {
-    $sql = "SELECT * FROM posts WHERE post_type = 'looking_for_student' AND role = 'tutor'";
+    $sql = "SELECT posts.*, users.username FROM posts 
+            JOIN users ON posts.user_id = users.id 
+            WHERE post_type = 'looking_for_student' AND posts.role = 'tutor'";
 
     // Add search filters to the query
     $conditions = [];
@@ -48,7 +50,7 @@ try {
         $params[] = "%$search_subject%";
     }
     if ($search_name) {
-        $conditions[] = "user_id IN (SELECT id FROM users WHERE username LIKE ?)";
+        $conditions[] = "users.username LIKE ?";
         $params[] = "%$search_name%";
     }
     if ($search_price && $search_price != 'all') {
@@ -75,31 +77,54 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Roboto', sans-serif;
             background-color: #f4f7fa;
             color: #333;
             margin: 0;
             padding: 0;
         }
         header {
-            background-color: #4CAF50;
+            background-color: #FF5722;
             color: white;
             padding: 15px 0;
             text-align: center;
+            position: relative;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .logout-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background-color: #FF5722;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .logout-btn:hover {
+            background-color: #e64a19;
         }
         .container {
             max-width: 900px;
-            margin: 0 auto;
+            margin: 20px auto;
             padding: 20px;
             background-color: white;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
         }
-        h2 {
-            color: #4CAF50;
+        .container h2 {
+            color: #FF5722;
+            font-size: 22px;
+            margin-bottom: 20px;
         }
         textarea, input[type="text"], select, input[type="number"] {
             width: 100%;
@@ -108,34 +133,41 @@ try {
             border-radius: 5px;
             border: 1px solid #ddd;
             font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        textarea:focus, input[type="text"]:focus, select:focus, input[type="number"]:focus {
+            border-color: #FF5722;
+            outline: none;
         }
         button {
-            background-color: #4CAF50;
+            background-color: #FF5722;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 20px;
             font-size: 16px;
             cursor: pointer;
             border-radius: 5px;
             width: 100%;
             margin: 10px 0;
+            transition: background-color 0.3s ease;
         }
         button:hover {
-            background-color: #45a049;
+            background-color: #e64a19;
         }
         .post-list {
             margin-top: 20px;
         }
         .post-item {
-            padding: 15px;
+            padding: 20px;
             margin-bottom: 10px;
             background-color: #f9f9f9;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         .post-item h4 {
-            margin: 0 0 5px;
+            margin: 0 0 10px;
             color: #333;
+            font-size: 18px;
         }
         .post-item p {
             margin: 5px 0;
@@ -143,7 +175,7 @@ try {
         }
         .post-item .price {
             font-weight: bold;
-            color: #4CAF50;
+            color: #FF5722;
         }
         footer {
             text-align: center;
@@ -152,12 +184,22 @@ try {
             padding: 10px;
             margin-top: 20px;
         }
+        .search-form input[type="text"], .search-form select {
+            width: 30%;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .search-form button {
+            width: auto;
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
 
     <header>
         <h1>Welcome, <?php echo $_SESSION['username']; ?></h1>
+        <button class="logout-btn" onclick="window.location.href='logout.php'">Logout</button>
     </header>
 
     <div class="container">
@@ -178,7 +220,7 @@ try {
     <div class="container">
         <!-- Search Form -->
         <h2>Search Tutors</h2>
-        <form method="GET">
+        <form method="GET" class="search-form">
             <input type="text" name="subject" placeholder="Search by Subject" value="<?php echo htmlspecialchars($search_subject); ?>"><br>
             <input type="text" name="name" placeholder="Search by Tutor Name" value="<?php echo htmlspecialchars($search_name); ?>"><br>
             <select name="price">
@@ -196,16 +238,16 @@ try {
         <div class="post-list">
             <?php foreach ($tutor_posts as $post): ?>
                 <div class="post-item">
-                    <h4><?php echo htmlspecialchars($post['message']); ?></h4>
-                    <p>Subject: <?php echo htmlspecialchars($post['subject']); ?></p>
-                    <p class="price">Price: <?php echo $post['price'] === 'free' ? 'Free' : '$' . number_format($post['price_amount'], 2); ?></p>
+                    <h4><?php echo htmlspecialchars($post['username']); ?> - <?php echo htmlspecialchars($post['subject']); ?></h4>
+                    <p><?php echo htmlspecialchars($post['message']); ?></p>
+                    <p><strong>Price:</strong> <?php echo $post['price'] == 'free' ? 'Free' : '$' . htmlspecialchars($post['price_amount']); ?></p>
                 </div>
             <?php endforeach; ?>
         </div>
     </div>
 
     <footer>
-        <button onclick="window.location.href='logout.php'">Logout</button>
+        <p>&copy; 2024 Online Tutoring System</p>
     </footer>
 
 </body>
