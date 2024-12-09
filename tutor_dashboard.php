@@ -56,7 +56,7 @@ try {
     <!-- BSU Background Style -->
     <style>
         body {
-            background-color: #003366; /* BSU Blue */
+            background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('BSU3.png');
             color: #fff;
         }
         .card {
