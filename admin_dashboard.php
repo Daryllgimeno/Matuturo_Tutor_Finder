@@ -17,7 +17,7 @@ include('config.php'); // This includes your PDO connection setup
 
 // Fetch all registered users from the database
 try {
-    $stmt = $conn->prepare("SELECT id, username, role FROM users"); 
+    $stmt = $conn->prepare("SELECT id, username, role, email FROM users"); 
     $stmt->execute();
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
@@ -62,7 +62,8 @@ try {
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
         }
 
-        .table th, .table td {
+        .table th,
+        .table td {
             vertical-align: middle;
         }
 
@@ -74,7 +75,8 @@ try {
             margin-top: 20px;
         }
 
-        h1, h3 {
+        h1,
+        h3 {
             color: #007bff;
         }
 
@@ -126,6 +128,7 @@ try {
                                 <tr>
                                     <th>ID</th>
                                     <th>Username</th>
+                                    <th>Email</th>
                                     <th>Role</th>
                                 </tr>
                             </thead>
@@ -134,6 +137,7 @@ try {
                                     <tr>
                                         <td><?php echo htmlspecialchars($user['id']); ?></td>
                                         <td><?php echo htmlspecialchars($user['username']); ?></td>
+                                        <td><?php echo htmlspecialchars($user['email']); ?></td>
                                         <td><?php echo htmlspecialchars($user['role']); ?></td>
                                     </tr>
                                 <?php endforeach; ?>
