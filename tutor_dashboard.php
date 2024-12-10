@@ -38,6 +38,28 @@ try {
     die('Error: ' . $e->getMessage());
 }
 
+// Fetch user's own posts
+try {
+    $stmt = $conn->prepare("SELECT * FROM posts WHERE user_id = ? AND post_type = 'looking_for_student'");
+    $stmt->execute([$_SESSION['user_id']]);
+    $user_posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    die('Error: ' . $e->getMessage());
+}
+
+// Handle deletion of user's own post
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_post_id'])) {
+    $delete_post_id = $_POST['delete_post_id'];
+
+    try {
+        $stmt = $conn->prepare("DELETE FROM posts WHERE id = ? AND user_id = ?");
+        $stmt->execute([$delete_post_id, $_SESSION['user_id']]);
+        header("Location: {$_SERVER['PHP_SELF']}");
+        exit();
+    } catch (PDOException $e) {
+        die('Error: ' . $e->getMessage());
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -112,6 +134,19 @@ try {
                     <p><strong>Subject:</strong> <?php echo htmlspecialchars($post['subject']); ?></p>
                     <p><strong>Price:</strong> <?php echo $post['price'] === 'free' ? 'Free' : '$' . number_format($post['price_amount'], 2); ?></p>
                 </div>
+            <?php endforeach; ?>
+        </div>
+
+        <!-- Display User's Own Posts with Delete Option -->
+        <h2 class="mt-4">Your Posts</h2>
+        <div class="list-group">
+            <?php foreach ($user_posts as $post): ?>
+                <form method="POST" class="list-group-item">
+                    <p><strong>Message:</strong> <?php echo htmlspecialchars($post['message']); ?></p>
+                    <p><strong>Subject:</strong> <?php echo htmlspecialchars($post['subject']); ?></p>
+                    <p><strong>Price:</strong> <?php echo $post['price'] === 'free' ? 'Free' : '$' . number_format($post['price_amount'], 2); ?></p>
+                    <button type="submit" name="delete_post_id" value="<?php echo $post['id']; ?>" class="btn btn-danger mt-2">Delete</button>
+                </form>
             <?php endforeach; ?>
         </div>
     </div>
