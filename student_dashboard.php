@@ -29,15 +29,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['message'], $_POST['sub
     }
 }
 
-// Fetch posts from tutors
-try {
-    $stmt = $conn->prepare("SELECT posts.*, users.username FROM posts JOIN users ON posts.user_id = users.id WHERE post_type = 'looking_for_student' AND posts.role = 'tutor'");
-    $stmt->execute();
-    $tutor_posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-    die('Error: ' . $e->getMessage());
-}
-
 // Handle deletion of a student's own post
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_post_id'])) {
     $delete_post_id = $_POST['delete_post_id'];
@@ -45,6 +36,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_post_id'])) {
     try {
         $stmt = $conn->prepare("DELETE FROM posts WHERE id = ? AND user_id = ?");
         $stmt->execute([$delete_post_id, $_SESSION['user_id']]);
+        header("Location: {$_SERVER['PHP_SELF']}");
+        exit();
+    } catch (PDOException $e) {
+        die('Error: ' . $e->getMessage());
+    }
+}
+
+// Handle post update
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit_post_id'], $_POST['edit_message'], $_POST['edit_subject'], $_POST['edit_price'])) {
+    $edit_post_id = $_POST['edit_post_id'];
+    $edit_message = $_POST['edit_message'];
+    $edit_subject = $_POST['edit_subject'];
+    $edit_price = $_POST['edit_price'];
+    $edit_price_amount = $edit_price === 'paid' ? $_POST['edit_price_amount'] : null;
+
+    try {
+        $stmt = $conn->prepare("UPDATE posts SET message = ?, subject = ?, price = ?, price_amount = ? WHERE id = ? AND user_id = ?");
+        $stmt->execute([$edit_message, $edit_subject, $edit_price, $edit_price_amount, $edit_post_id, $_SESSION['user_id']]);
         header("Location: {$_SERVER['PHP_SELF']}");
         exit();
     } catch (PDOException $e) {
@@ -124,7 +133,7 @@ try {
             </form>
         </div>
 
-        <!-- Display Student's Own Posts with Delete Option -->
+        <!-- Display Student's Own Posts with Edit/Delete Options -->
         <h2 class="mt-4">Your Requests</h2>
         <div class="list-group">
             <?php foreach ($student_posts as $post): ?>
@@ -133,25 +142,46 @@ try {
                     <p><strong>Subject:</strong> <?php echo htmlspecialchars($post['subject']); ?></p>
                     <p><strong>Price:</strong> <?php echo $post['price'] === 'free' ? 'Free' : '$' . number_format($post['price_amount'], 2); ?></p>
                     <button type="submit" name="delete_post_id" value="<?php echo $post['id']; ?>" class="btn btn-danger mt-2">Delete</button>
+                    <button type="button" class="btn btn-warning mt-2" data-bs-toggle="modal" data-bs-target="#editModal<?php echo $post['id']; ?>">Edit</button>
+                    
+                    <!-- Edit Modal -->
+                    <div class="modal fade" id="editModal<?php echo $post['id']; ?>" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editModalLabel">Edit Request</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="POST">
+                                        <input type="hidden" name="edit_post_id" value="<?php echo $post['id']; ?>">
+                                        <div class="mb-3">
+                                            <textarea name="edit_message" class="form-control" required><?php echo htmlspecialchars($post['message']); ?></textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <input type="text" name="edit_subject" class="form-control" value="<?php echo htmlspecialchars($post['subject']); ?>" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <select name="edit_price" class="form-select">
+                                                <option value="free" <?php echo $post['price'] === 'free' ? 'selected' : ''; ?>>Free</option>
+                                                <option value="paid" <?php echo $post['price'] === 'paid' ? 'selected' : ''; ?>>Paid</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <input type="number" name="edit_price_amount" class="form-control" step="0.01" value="<?php echo htmlspecialchars($post['price_amount']); ?>">
+                                        </div>
+                                        <button type="submit" class="btn btn-success">Save Changes</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
-            <?php endforeach; ?>
-        </div>
-
-        <!-- Display Tutor Posts -->
-        <h2 class="mt-4">Available Tutors Offering Help</h2>
-        <div class="list-group">
-            <?php foreach ($tutor_posts as $post): ?>
-                <div class="list-group-item">
-                    <p><strong>Posted by:</strong> <?php echo htmlspecialchars($post['username']); ?></p>
-                    <p><strong>Message:</strong> <?php echo htmlspecialchars($post['message']); ?></p>
-                    <p><strong>Subject:</strong> <?php echo htmlspecialchars($post['subject']); ?></p>
-                    <p><strong>Price:</strong> <?php echo $post['price'] === 'free' ? 'Free' : '$' . number_format($post['price_amount'], 2); ?></p>
-                </div>
             <?php endforeach; ?>
         </div>
     </div>
 
-    <!-- Bootstrap JS and dependencies -->
+    <!-- Load Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 </body>
